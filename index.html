@@ -68,10 +68,7 @@ h1{
 
 @keyframes float{to{transform:translateY(-120vh);}}
 
-/* ===================== */
-/* CREATIVE QR HEART FRAME */
-/* ===================== */
-
+/* QR FRAME */
 .qr-frame{
   position:relative;
   width:280px;
@@ -81,7 +78,6 @@ h1{
   justify-content:center;
 }
 
-/* Heart outline */
 .qr-frame::before,
 .qr-frame::after{
   content:"";
@@ -105,14 +101,12 @@ h1{
   transform-origin:100% 100%;
 }
 
-/* Glow overlay */
 .qr-frame span{
   position:absolute;
   inset:0;
   filter:drop-shadow(0 0 18px rgba(255,79,135,.6));
 }
 
-/* Square QR */
 #qrcode{
   background:white;
   padding:12px;
@@ -193,10 +187,10 @@ for(let i=0;i<30;i++){
   </div>
 </div>
 
-<!-- AFTER QR SCAN -->
+<!-- AFTER QR -->
 <div class="slide" id="qrscan">
   <h1>She Picked This Rose for You 🌹</h1>
- <img class="gif" src="https://media.tenor.com/4s8p4uQb1z0AAAAC/cute-bubu-dudu-rose.gif">
+  <img class="gif" src="https://media.tenor.com/4s8p4uQb1z0AAAAC/cute-bubu-dudu-rose.gif">
   <p>Because you’re special 💕</p>
   <button class="btn" onclick="openNote()">Open the Letter 💌</button>
 </div>
@@ -221,22 +215,31 @@ function go(n){
  document.getElementById("s"+n)?.classList.add("active");
 }
 
+// QR
+const qrURL = "https://harshitachandak80-lang.github.io/rose-day/#qrscan";
+
 new QRCode(document.getElementById("qrcode"),{
- text:"https://harshitachandak80-lang.github.io/rose-day/#qrscan",
+ text: qrURL,
  width:180,
  height:180
 });
 
-if(window.location.hash === "#qrscan"){
- document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
- document.getElementById("qrscan").classList.add("active");
+// after scan load
+window.addEventListener("load", ()=>{
+ if(window.location.hash === "#qrscan"){
+   document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
+   document.getElementById("qrscan").classList.add("active");
+ }
+});
+
+function openNote(){
+ document.getElementById("popup").style.display="flex";
 }
 
-function openNote(){document.getElementById("popup").style.display="flex";}
-function closeNote(){document.getElementById("popup").style.display="none";}
+function closeNote(){
+ document.getElementById("popup").style.display="none";
+}
 </script>
 
 </body>
-
 </html>
-
